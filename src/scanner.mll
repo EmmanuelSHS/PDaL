@@ -17,19 +17,14 @@ rule token = parse
 | "##"  { multiComment lexbuf }
 | '('   { LPAREN }  
 | ')'   { RPAREN }  
-| '['   { LBRACK }  
-| ']'   { RBRACK }  
+| '['   { LBRACKET }  
+| ']'   { RBRACKET }  
 | ','   { COMMA }   
 | "+"   { PLUS }    
 | "-"   { MINUS }   
 | "*"   { TIMES }   
 | "/"   { DIVIDE }  
-| "int" { INT }     
-| "string" { STR }  
-| "True"    { TRUE }
-| "in"  { IN }      
 | '%'   { MOD }     
-| "*="  { TEQ }      
 | "="   { ASSIGN }  
 | "=="  { EQ }      
 | "!="  { NEQ }     
@@ -40,11 +35,18 @@ rule token = parse
 | "and" { AND }     
 | "or"  { OR }      
 | "float" { FLOAT } 
-| "dataframe" { DF }
 | "False" { FALSE } 
 | ":"   { COLON }   
-| "+="  { PEQ }     
-| "/="  { DEQ }     
+| "+="  { PLUSEQ }     
+| "/="  { DIVIDEEQ }     
+| "%="  { MINUSEQ }
+| "*="  { TIMESEQ }      
+| "-="      { MODEQ }
+| "int" { INT }     
+| "dataframe" { DATAFRAME }
+| "string" { STRING }  
+| "True"    { TRUE }
+| "in"  { IN }      
 | "if"      { IF }
 | "else"    { ELSE } 
 | "elif"    { ELIF }
@@ -57,8 +59,7 @@ rule token = parse
 | "bool"    { BOOL }
 | "None"    { NONE }
 | "end"     { END }
-| "def"     { DEF }
-| "-="      { MEQ }
+| "def"     { FUNCTION }
 | "\n"      { EOL }
 | int as lxm { INT_LITERAL(int_of_string lxm) }
 | float as lxm { FLOAT_LITERAL(float_of_string lxm) }
